@@ -123,9 +123,81 @@ public class CalculatorTest {
 		assertEquals(0,testCalc.getTotal());
 	}
 
+	//Tests that history initializes correctly
 	@Test
 	public void testGetHistory() {
-		fail("Not yet implemented");
+
+		Calculator testCalc = new Calculator();
+
+		assertEquals("0", testCalc.getHistory());
 	}
 
+	//Tests that history works correctly after
+	//several operations
+	@Test
+	public void testGetHistoryMultiple() {
+
+		Calculator testCalc = new Calculator();
+
+		testCalc.add(4); 
+		testCalc.subtract(2); 
+		testCalc.multiply(2); 
+		testCalc.divide(5); 
+
+		assertEquals("0 + 4 - 2 * 2 / 5", testCalc.getHistory());
+	}
+
+	//Tests that history works correctly after
+	//many operations, including a divide by zero
+	@Test
+	public void testGetHistoryLong() {
+
+		Calculator testCalc = new Calculator();
+
+		testCalc.add(10);
+		testCalc.subtract(2);
+		testCalc.multiply(4);
+		testCalc.divide(0);
+		testCalc.add(1);
+		testCalc.multiply(50);
+		testCalc.subtract(0);
+		testCalc.multiply(3);
+		testCalc.divide(4);
+		testCalc.multiply(13);
+
+		assertEquals("0 + 10 - 2 * 4 / 0 + 1 * 50 - 0 * 3 / 4 * 13",
+				     testCalc.getHistory());
+	}
+
+	//Tests that calculator works correctly after
+	//several operations
+	@Test
+	public void testGetTotalMultiple() {
+
+		Calculator testCalc = new Calculator();
+
+		testCalc.add(4);
+		testCalc.subtract(2);
+		testCalc.multiply(2);
+		testCalc.divide(4);
+
+		assertEquals(1, testCalc.getTotal());
+	}
+
+	//Tests that calculator works correctly after
+	//several operations, including a divide by zero
+	@Test
+	public void testGetTotalMultipleDivideZero() {
+
+		Calculator testCalc = new Calculator();
+
+		testCalc.add(10);
+		testCalc.subtract(2);
+		testCalc.multiply(4);
+		testCalc.divide(0);
+		testCalc.add(4);
+		testCalc.multiply(5);
+
+		assertEquals(20, testCalc.getTotal());
+	}
 }
